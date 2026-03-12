@@ -36,6 +36,16 @@ test('test2', async ({ page }) => {
   await page.getByRole('link', { name: 'Courses', exact: true }).click();
   await page.getByRole('link', { name: 'Practice', exact: true }).click();
   await page.getByRole('link', { name: 'Test Login Page' }).click();
+  await page.getByText('Password123').first().click();
+  await expect(page.getByText('Password123')).toBeVisible
+});
 
-  await expect(page.getByRole('heading', { name: /Test login/ })).toBeVisible();
+test('test3', async ({ page }) => {
+  await page.goto('https://practicetestautomation.com/');
+  await page.getByRole('link', { name: 'Courses', exact: true }).click();
+  const page1Promise = page.waitForEvent('popup');
+  await page.getByRole('link', { name: 'Enroll in this course on Udemy' }).first().click();
+  const page1 = await page1Promise;
+
+  await expect(page.getByRole('heading',{name:/Courses/})).toBeVisible();
 });
